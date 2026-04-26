@@ -1,0 +1,135 @@
+apiVersion: zeabur.com/v1
+kind: Template
+metadata:
+  name: OpenChamber
+spec:
+  description: A rich interface for OpenCode. Review diffs, manage agents, run dev servers, and keep the big picture while your AI codes.
+  coverImage: https://openchamber.dev/logo-dark.svg
+  icon: https://openchamber.dev/logo-dark.svg
+  variables:
+    - key: OPENCHAMBER_HOST
+      type: STRING
+      name: Host
+      description: Bind address (e.g., 0.0.0.0 for all interfaces)
+    - key: OPENCHAMBER_UI_PASSWORD
+      type: STRING
+      name: UI Password
+      description: Protect the browser UI with a single password
+    - key: OPENCHAMBER_DATA_DIR
+      type: STRING
+      name: Data Directory
+      description: Override OpenChamber data directory
+    - key: OPENCODE_HOST
+      type: STRING
+      name: OpenCode Host
+      description: External OpenCode server base URL (e.g., http://hostname:4096)
+    - key: OPENCODE_PORT
+      type: STRING
+      name: OpenCode Port
+      description: Port of external OpenCode server to connect to
+    - key: OPENCODE_SKIP_START
+      type: STRING
+      name: Skip OpenCode Start
+      description: Skip starting OpenCode, use external server (true/false)
+    - key: OPENCHAMBER_OPENCODE_HOSTNAME
+      type: STRING
+      name: OpenCode Hostname
+      description: Bind hostname for managed OpenCode server
+  tags:
+    - AI
+    - Developer Tools
+    - Web
+  readme: >-
+    # OpenChamber
+
+    OpenChamber is a web interface for the OpenCode AI coding agent.
+    It provides a graphical UI to interact with OpenCode directly from your browser.
+
+    ## Features
+    - Web-based interface for OpenCode
+    - Password protection for UI
+    - Tunnel support for remote access
+    - Real-time logs
+
+    ## Environment Variables
+    - OPENCHAMBER_HOST: Bind address (default: 0.0.0.0)
+    - OPENCHAMBER_UI_PASSWORD: Protect UI with password
+    - OPENCHAMBER_DATA_DIR: Data directory
+    - OPENCODE_HOST: External OpenCode server URL
+    - OPENCODE_PORT: External OpenCode server port
+  resourceUsage:
+    cpu: 0.1
+    memory: 512
+  resourceRequirement:
+    minConfig:
+      cpu: 0.5
+      ram: 0.5
+    recommendedConfig:
+      cpu: 1
+      ram: 1
+  services:
+    - filename: Dockerfile
+      serviceName: openchamber
+localization:
+    en-US:
+      description: A rich interface for OpenCode. Review diffs, manage agents, run dev servers, and keep the big picture while your AI codes.
+      variables:
+        - key: OPENCHAMBER_HOST
+          type: STRING
+          name: Host
+          description: Bind address (e.g., 0.0.0.0 for all interfaces)
+        - key: OPENCHAMBER_UI_PASSWORD
+          type: STRING
+          name: UI Password
+          description: Protect the browser UI with a single password
+        - key: OPENCHAMBER_DATA_DIR
+          type: STRING
+          name: Data Directory
+          description: Override OpenChamber data directory
+        - key: OPENCODE_HOST
+          type: STRING
+          name: OpenCode Host
+          description: External OpenCode server base URL
+        - key: OPENCODE_PORT
+          type: STRING
+          name: OpenCode Port
+          description: Port of external OpenCode server
+        - key: OPENCODE_SKIP_START
+          type: STRING
+          name: Skip OpenCode Start
+          description: Skip starting OpenCode, use external server
+        - key: OPENCHAMBER_OPENCODE_HOSTNAME
+          type: STRING
+          name: OpenCode Hostname
+          description: Bind hostname for managed OpenCode server
+    zh-TW:
+      description: OpenCode 的豐富介面。審查 Diff、管理代理、执行开发服务器，让您在 AI 编码时保持大局观。
+      variables:
+        - key: OPENCHAMBER_HOST
+          type: STRING
+          name: 主機
+          description: 綁定位址 (例如 0.0.0.0 綁定所有介面)
+        - key: OPENCHAMBER_UI_PASSWORD
+          type: STRING
+          name: UI 密碼
+          description: 保護網頁介面的密碼
+        - key: OPENCHAMBER_DATA_DIR
+          type: STRING
+          name: 數據目錄
+          description: 覆寫 OpenChamber 數據目錄
+        - key: OPENCODE_HOST
+          type: STRING
+          name: OpenCode 主機
+          description: 外部 OpenCode 伺服器網址
+        - key: OPENCODE_PORT
+          type: STRING
+          name: OpenCode 連接埠
+          description: 外部 OpenCode 伺服器連接埠
+        - key: OPENCODE_SKIP_START
+          type: STRING
+          name: 略過 OpenCode 啟動
+          description: 略過 OpenCode 啟動，使用外部伺服器
+        - key: OPENCHAMBER_OPENCODE_HOSTNAME
+          type: STRING
+          name: OpenCode 主機名稱
+          description: 受管理的 OpenCode 伺服器綁定主機名稱

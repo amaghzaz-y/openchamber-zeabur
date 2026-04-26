@@ -20,6 +20,9 @@ ENV PATH="/root/.local/bin:$PATH"
 
 RUN curl -fsSL https://opencode.ai/install | bash
 
+ENV PATH="/root/.opencode/bin:/root/.local/bin:$PATH"
+ENV OPENCODE_BINARY="/root/.opencode/bin/opencode"
+
 RUN curl -fsSL https://raw.githubusercontent.com/openchamber/openchamber/main/scripts/install.sh | bash
 
 ENV OPENCHAMBER_HOST=0.0.0.0

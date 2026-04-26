@@ -4,7 +4,14 @@ on:
   push:
     branches:
       - main
+    tags:
+      - 'v*'
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag version (e.g., v0.1.0)'
+        required: false
+        type: string
 
 jobs:
   build:
@@ -25,11 +32,24 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Extract tag
+        id: extract
+        run: |
+          if [ -n "${{ github.inputs.tag }}" ]; then
+            echo "TAG=${{ github.inputs.tag }}" >> $GITHUB_OUTPUT
+          elif [ -n "${{ github.ref_name }}" ]; then
+            echo "TAG=${{ github.ref_name }}" >> $GITHUB_OUTPUT
+          else
+            echo "TAG=latest" >> $GITHUB_OUTPUT
+          fi
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository }}/openchamber:latest
+          tags: |
+            ghcr.io/${{ github.repository }}/openchamber:latest
+            ghcr.io/${{ github.repository }}/openchamber:${{ steps.extract.outputs.TAG }}
           cache-from: type=gha
           cache-to: type=gha,mode=max

@@ -68,8 +68,17 @@ spec:
       cpu: 1
       ram: 1
   services:
-    - filename: Dockerfile
-      serviceName: openchamber
+    - name: openchamber
+      icon: https://openchamber.dev/logo-dark.svg
+      template: PREBUILT
+      spec:
+        source:
+          image: ghcr.io/amaghzaz-y/openchamber-zeabur/openchamber:latest
+        ports:
+          - id: web
+            port: 3000
+            type: HTTP
+        expose: true
 localization:
     en-US:
       description: A rich interface for OpenCode. Review diffs, manage agents, run dev servers, and keep the big picture while your AI codes.
